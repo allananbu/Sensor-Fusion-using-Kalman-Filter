@@ -53,18 +53,21 @@ org_Lon=[]
 for i in range(1,len(data)):
     curr_data=data[i]
     
-    #call priori objects
-    objEast.predict(curr_data['abs_east_acc']*Gravity_const,curr_data['timestamp'])
-    objNorth.predict(curr_data['abs_north_acc']*Gravity_const,curr_data['timestamp'])
-    objUp.predict(curr_data['abs_up_acc']*Gravity_const,curr_data['timestamp'])
+
     
     #if GPS data is not zero
     if(curr_data['gps_lat']!=0.0):
+            
+        #call priori objects
+        objEast.predict(curr_data['abs_east_acc']*Gravity_const,curr_data['timestamp'])
+        objNorth.predict(curr_data['abs_north_acc']*Gravity_const,curr_data['timestamp'])
+        objUp.predict(curr_data['abs_up_acc']*Gravity_const,curr_data['timestamp'])
+        
         defPosErr=0.0
         
         vEast=curr_data['vel_east']
         longitude=objEast.lonToMtrs(curr_data['gps_lon'])
-        objEast.updata(longitude,vEast,defPosErr,curr_data['vel_error'])
+        objEast.update(longitude,vEast,defPosErr,curr_data['vel_error'])
         
         vNorth=curr_data['vel_north']
         latitude=objNorth.latToMtrs(curr_data['gps_lat'])
@@ -80,9 +83,9 @@ for i in range(1,len(data)):
     
     #get predicted values
     #get lat,lon,alt in meters
-    predicted_LonMtrs=objEast.getPredictedPos()
-    predicted_LatMtrs=objNorth.getPredictedPos()
-    predicted_Alt=objUp.getPredictedPos()
+    predicted_LonMtrs=objEast.getPredictedpos()
+    predicted_LatMtrs=objNorth.getPredictedpos()
+    predicted_Alt=objUp.getPredictedpos()
     
     #convert meters to geopoint
     predicted_Lat,predicted_Lon=helperObj.mtrstoGeopt(predicted_LatMtrs,predicted_LonMtrs)
@@ -97,6 +100,8 @@ for i in range(1,len(data)):
     #append predicted Lat,Lon to list
     Lat_pts.append(predicted_Lat)
     Lon_pts.append(predicted_Lon)
+
+org_Lon=[i*-1.0 for i in org_Lon]
 
 plt.subplot(2,1,1)
 plt.title('original')

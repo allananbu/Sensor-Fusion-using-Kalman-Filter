@@ -17,7 +17,7 @@ class kalmanFilter(helperMethods):
         helperMethods.__init__(self)
         #from the received arguments, set values for below parameters
         #current state
-        self.X=np.array([[np.float64(initPos)],np.float64(initVel)])
+        self.X=np.array([[np.float64(initPos)],[np.float64(initVel)]])
         #Identity matrix
         self.I=np.identity(2)
         #Initial guess for covariance

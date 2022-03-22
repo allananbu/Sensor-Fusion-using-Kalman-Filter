@@ -79,20 +79,20 @@ class helperMethods(object):
         δ is the angular distance d/R; d being the distance travelled, R the earth’s radius
         '''
         radiusFraction=distMtrs/EARTH_RADIUS
-        bearing=self.degtoRad(azimuth)
-        lat1=self.degtoRad(lat_from)
-        lon1=self.degtoRad(lon_from)
+        bearing=self.degToRad(azimuth)
+        lat1=self.degToRad(lat_from)
+        lon1=self.degToRad(lon_from)
         
         lat2_part1=np.sin(lat1)*np.cos(radiusFraction)
         lat2_part2=np.cos(lat1)*np.sin(radiusFraction)*np.cos(bearing)
         
         lat2=np.arcsin(lat2_part1+lat2_part2) #final latitude
         
-        lon2_part1=np.sin(bearing)*np.sin(radiusFraction)(np.cos(lat1))
+        lon2_part1=np.sin(bearing)*np.sin(radiusFraction)*(np.cos(lat1))
         lon2_part2=np.cos(radiusFraction)-np.sin(lat1)*np.sin(lat2)
         
         lon2=lon1+np.arctan2(lon2_part1,lon2_part2)
-        #lon2 = np.mod((lon2 + 3 * np.pi), (2 * np.pi)) - np.pi why??
+        lon2 = np.mod((lon2 + 3 * np.pi), (2 * np.pi)) - np.pi #why
         
         return self.radToDeg(lat2),self.radToDeg(lon2)
     
