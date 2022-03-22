@@ -96,6 +96,7 @@ class helperMethods(object):
         
         return self.radToDeg(lat2),self.radToDeg(lon2)
     
+    #Convert longitude and latitude separately
     def mtrstoGeopt(self,latAsMtrs,lonAsMtrs):
         '''
         conversion from meters to geopoint

@@ -101,6 +101,7 @@ for i in range(1,len(data)):
     Lat_pts.append(predicted_Lat)
     Lon_pts.append(predicted_Lon)
 
+#align longitude with original data
 org_Lon=[i*-1.0 for i in org_Lon]
 
 plt.subplot(2,1,1)

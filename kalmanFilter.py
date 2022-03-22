@@ -45,6 +45,7 @@ class kalmanFilter(helperMethods):
         self.P=np.add(np.matmul(np.matmul(self.A,self.P),np.transpose(self.A)),self.Q) 
             
         self.currStateTime=timeNow
+        #update of Kalman filter
     def update(self,pos,velThisAxis,posError,velError):
         '''
         Updates the predicted state using GPS measurements
